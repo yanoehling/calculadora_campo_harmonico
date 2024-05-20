@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Musical</title>
+    <link rel="stylesheet" href="style_ca.css">
+</head>
+
+<body>
+    <header>
+        <h2>Calculadora Musical:</h2>
+        <h2>Campo Harmônico</h2>
+    </header>
+    <section id="section">
+        <div id="inputs">
+            <div>
+                <label for="select">Escolha sua escala/modo:</label>
+                <select id="select"></select>
+            </div>
+            <div>
+                <label for="acordes">Mostrar acordes:</label>
+                <input type="checkbox" id="acordes" onclick="cores(null, 'LIMPAR')">
+            </div>
+            <div>
+                <label for="setimas">Mostrar sétimas:</label>
+                <input type="checkbox" id="setimas" onclick="cores(null, 'LIMPAR')">
+            </div>
+        </div>
+        <div id="notas">
+            <p>Clique no tom pra ver as notas da escala:</p>
+        </div>
+    </section>
+    <footer>
+        <a href="https://github.com/yanoehling"><i>Yan M. Oehling</i></a>
+    </footer>
+    <script src="script_ca.js"></script>
+</body>
+
+</html>

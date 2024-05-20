@@ -1,0 +1,141 @@
+* {
+	font-weight: 700;
+}
+
+body {
+	background-color: rgb(31, 151, 172);
+	align-content: center;
+	align-items: center;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+	color: white;
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+section {
+	background-color: white;
+	padding: 20px;
+	width: 350px;
+	border-radius: 10px;
+	margin: auto;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+select#select {
+	height: 33px;
+	width: 210px;
+	text-align: left;
+	font-size: 18px;
+	font-style: italic;
+	font-weight: 800;
+	margin: 5px;
+}
+
+#inputs {
+	display: grid;
+	gap: 20px;
+	margin-bottom: 20px;
+}
+
+#inputs div + div {
+	display: flex;
+	gap: 15px;
+	justify-content: space-between;
+	max-width: calc(50% - 15px);
+}
+
+#inputs input {
+	transform: scale(2);
+}
+
+div#notas {
+	font-size: 18px;
+	align-items: center;
+	align-content: center;
+}
+
+button#limpar {
+	background-color: rgb(252, 197, 205);
+	margin-top: 10px;
+	margin-left: 150px;
+	height: 50px;
+	width: fit-content;
+	border-radius: 20px;
+	font-style: italic;
+	font-size: 15px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+button#limpar:hover {
+	background-color: rgb(230, 180, 185);
+}
+
+.botao_clicado {
+    background-color: #4e8ae4;
+    color: white;
+    border-color: lightsilver;
+} .botao_clicado:hover {
+	background-color: #1f5696;
+}
+
+.botao_relativa{
+	background-color: #b0ff48;
+    color: black;
+    border-color: lightgrey;
+}.botao_relativa:hover{
+	background-color: #82d417
+}
+
+.botao_na_escala {
+    background-color: #fff238;
+    color: black;
+    border-color: lightgrey;
+}.botao_na_escala:hover {
+    background-color: rgb(222, 224, 85);
+}
+
+.botao_ignorado {
+    background-color: transparent;
+    color: rgb(85, 85, 85);
+    border-color: transparent;
+} .botao_ignorado:hover {
+	background-color: rgb(214, 214, 214);
+}
+
+.botoes_padrao {
+	width: 85px;
+	height: 60px;
+	font-size: 20px;
+	font-weight: 500;
+	transition: 0.5s;
+	cursor: pointer;
+	border: solid lightskyblue 1px;
+	border-radius: 10px;
+	margin: 1px;
+}
+
+footer {
+	margin-top: 20px;
+	text-align: center;
+	font-size: 18px;
+	color: #3877ff;
+}
+
+@media (max-width: 400px) {
+	* {
+		margin-left: 0;
+		padding-left: 0;
+		/*box-sizing: content-box;*/
+	}
+	body {
+		scale: 85%;
+		align-content: center;
+		align-items: center;
+	}
+
+}
