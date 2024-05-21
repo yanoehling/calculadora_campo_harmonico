@@ -71,15 +71,15 @@ function finalizacao(id_clicado, listas, nota_escolhida){
     let lista_acordes = listas[1];
     let lista_setimas = listas[2]; 
     let id_modo = listas[3]; 
-    var contagem = 0;             
+    var contagem = 0; 
+    var notas_para_tocar = [];            
     for (var cont in nota_escolhida){ 
         let nota_atual = nota_escolhida[cont];
         let botao_atual = document.getElementById(`${nota_atual}`);
         
         if (modo_escolhido[cont] == 1){ 
-            var som_da_nota = new Audio(`Sons/${nota_atual}.mp3`);
-            som_da_nota.play();
-            acordes_box = document.getElementById('acordes');
+            notas_para_tocar.push(botao_atual.id)
+            acordes_box = document.getElementById('acordes'); 
             setimas_box = document.getElementById('setimas');
 
             if (botao_atual.id == id_clicado){
@@ -108,6 +108,7 @@ function finalizacao(id_clicado, listas, nota_escolhida){
             cores(botao_atual, 'ignorado');
         }
     }
+    tocar_sons(notas_para_tocar)
 }
 
 
@@ -127,4 +128,22 @@ function cores(botao_atual = null, comando) {
         botao_atual.innerText = botao_atual.id;
         botao_atual.classList.add(`botao_${comando}`);
     } 
+}
+
+function tocar_sons(escala){
+    if (contagem > escala.length){
+        clearInterval(comando);
+    }
+    let comando = setInterval(tocar, 350);
+    escala.push(`${escala[0]}5`);
+    var contagem = 0;
+    function tocar(){
+        let nota = escala[contagem]
+        if (nota.length == 2){
+            nota = nota[0]+'sus';
+        }
+        som = new Audio(`Sons/${nota}.mp3`);
+        som.play();
+        contagem += 1;
+    }
 }
