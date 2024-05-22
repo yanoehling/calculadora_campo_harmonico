@@ -7,30 +7,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora Musical</title>
     <link rel="stylesheet" href="style_ca.css">
+    <link rel="shortcut icon" href="#">
 </head>
 
 <body>
     <header>
-        <h2>Calculadora Musical:</h2>
-        <h2>Ligue o Som!</h2>
+        <h2>Calculadora de Campo Harmônico:</h2>
+        <h2>Ligue o Som 🔊</h2>
     </header>
     <section id="section">
         <div id="inputs">
             <div>
                 <label for="select">Escolha sua escala/modo:</label>
+            </div>
+            <div>
                 <select id="select"></select>
             </div>
             <div>
-                <label for="acordes">Mostrar acordes:</label>
+                <label id="acordes">Mostrar acordes:</label>
                 <input type="checkbox" id="acordes" onclick="cores(null, 'LIMPAR')">
-            </div>
-            <div>
-                <label for="setimas">Mostrar sétimas:</label>
+                <label id="setimas">Mostrar sétimas:</label>
                 <input type="checkbox" id="setimas" onclick="cores(null, 'LIMPAR')">
             </div>
         </div>
         <div id="notas">
             <p>Clique no tom pra ver as notas da escala:</p>
+        </div>
+        <div id="divswitch">
+            <span class="label">Bemol (#)</span>
+            <label class="switch">  
+                <input type="checkbox" id="switch" onclick="criar_botoes()">
+                <span class="slider round"></span>
+            </label>
+            <span class="label">Sustenido (b)</span>
         </div>
     </section>
     <footer>

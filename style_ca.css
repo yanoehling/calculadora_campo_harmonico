@@ -32,7 +32,7 @@ select#select {
 	font-size: 18px;
 	font-style: italic;
 	font-weight: 800;
-	margin: 5px;
+	margin: 0px;
 }
 
 #inputs {
@@ -52,6 +52,10 @@ select#select {
 	transform: scale(2);
 }
 
+label#setimas{
+	margin-left: 42px;
+}
+
 div#notas {
 	font-size: 18px;
 	align-items: center;
@@ -61,7 +65,7 @@ div#notas {
 button#limpar {
 	background-color: rgb(252, 197, 205);
 	margin-top: 10px;
-	margin-left: 150px;
+	margin-left: 136px;
 	height: 50px;
 	width: fit-content;
 	border-radius: 20px;
@@ -119,6 +123,57 @@ button#limpar:hover {
 	margin: 1px;
 }
 
+
+
+div#divswitch{
+	display: flex;
+    align-items: center;
+    width: 340px;
+	margin-top: 20px;
+}
+
+.label {
+    flex: 1; /* Ocupa o espaço restante */
+    text-align: center; /* Centraliza o texto */
+}
+
+.switch {
+	position: relative;
+	display: inline-flex;
+	width: 60px;
+	height: 30px;
+}.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(31, 151, 172, 0.568);
+	-webkit-transition: .4s;
+	transition: .4s;
+}.slider:before {
+	position: absolute;
+	content: "";
+	height: 22px;
+	width: 22px;
+	left: 6px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: .1s;
+	transition: .1s;
+}input:checked + .slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+}
+  
+
+
 footer {
 	margin-top: 20px;
 	text-align: center;
@@ -137,5 +192,6 @@ footer {
 		align-content: center;
 		align-items: center;
 	}
-
 }
+
+
