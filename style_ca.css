@@ -53,6 +53,10 @@ select#select {
 }
 
 label#lbl_setimas{
+	margin-left: 10px;
+}
+
+label#apenas_notas{
 	margin-left: 42px;
 }
 

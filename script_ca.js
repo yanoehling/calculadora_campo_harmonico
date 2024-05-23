@@ -2,11 +2,23 @@ const lista_sustenido = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', '
                          'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 const lista_bemol = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 
                      'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+
 const lista_modos = ['Jônio (maior)', 'Dórico', 'Frígio', 'Lídio', 'Mixolídio', 'Eólio (menor)', 'Lócrio'];
 const base_tom = [1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1];
 const posicoes_inicio = [0, 2, 4, 5, 7, 9, 11] // posicao dos primeiros 1s (notas) da lista de cima
 const base_acordes = ['', 'm', 'm', '', '', 'm', 'dim', '', 'm', 'm', '', '', 'm', 'dim'];
 const base_setimas = ['7M', '7', '7', '7M', '7', '7', 'Ø', '7M', '7', '7', '7M', '7', '7', 'Ø'];
+const audio_notas = {} 
+
+//adiciona as infos de audio de cada nota no dicionario "audio_notas"
+for (c in lista_bemol){
+    let nota = lista_bemol[c]
+    if (c < 12){
+        audio_notas[nota] = new Audio(`Sons/${nota}.mp3`);
+    } else {
+        audio_notas[`${nota}2`] = new Audio(`Sons/${nota}2.mp3`);
+    }
+}
 
 // cria as options com cada modo no select com ids de 0 a 6
 for (cont in lista_modos){               
@@ -16,9 +28,10 @@ for (cont in lista_modos){
     let modos = document.getElementById('select');
     modos.appendChild(option);
 }
+
+// cria os botoes com ids e textos de cada nota
 let div = document.getElementById('notas');
 criar_botoes()
-// cria os botoes com ids e textos de cada nota
 function criar_botoes(){
     div.innerHTML = ''
     if (document.getElementById('switch').checked){
@@ -92,7 +105,7 @@ function finalizacao(id_clicado, modo_escolhido, lista_acordes, lista_setimas, i
             } else {
                 cores(botao_atual, 'na_escala');} 
 
-            if (acordes_box.checked){  
+            if (acordes_box.checked == false){  
                 if ((id_modo == 0 && contagem == 5) || (id_modo == 5 && contagem == 2)){
                     cores(botao_atual, 'relativa');
                 }
@@ -135,15 +148,16 @@ function cores(botao_atual = null, comando) {
 function tocar_sons(escala){
     escala.push(`${escala[0]}2`);
     function tocar(){
-        if (`${escala[contagem]}` != 'undefined' && `${escala[contagem]}` != 'undefined2'){
-            let nota = `${escala[contagem]}`.replace('#', 'b');
-            som = new Audio(`Sons/${nota}.mp3`);
-            som.play();
+        try{
+            let nota = escala[contagem]
+            audio_notas[nota].pause();
+            audio_notas[nota].currentTime = 0
+            audio_notas[nota].play();
             contagem += 1;
-        }
+        } catch(x){}
     }
     var contagem = 0;
-    let comando = setInterval(tocar, 350);
+    let comando = setInterval(tocar, 360);
     if (contagem > escala.length || escala[contagem] == undefined){
         clearInterval(comando);
     } 
