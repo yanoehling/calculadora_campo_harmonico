@@ -11,12 +11,15 @@ const base_setimas = ['7M', '7', '7', '7M', '7', '7', 'Ø', '7M', '7', '7', '7M'
 const audio_notas = {} 
 
 //adiciona as infos de audio de cada nota no dicionario "audio_notas"
-for (c in lista_bemol){
-    let nota = lista_bemol[c]
+lista_1a3 = lista_bemol.concat(lista_bemol.slice(0, 12))
+for (c in lista_1a3){
+    let nota = lista_1a3[c];
     if (c < 12){
         audio_notas[nota] = new Audio(`Sons/${nota}.mp3`);
-    } else {
+    } else if (c < 24) {
         audio_notas[`${nota}2`] = new Audio(`Sons/${nota}2.mp3`);
+    } else {
+        audio_notas[`${nota}3`] = new Audio(`Sons/${nota}3.mp3`);
     }
 }
 
@@ -97,7 +100,7 @@ function finalizacao(id_clicado, modo_escolhido, lista_acordes, lista_setimas, i
                 notas_para_tocar.push(nota_atual_sons);
             } else {notas_para_tocar.push(nota_atual_sons + '2')}
 
-            acordes_box = document.getElementById('acordes'); 
+            so_notas_box = document.getElementById('acordes'); 
             setimas_box = document.getElementById('setimas');
 
             if (botao_atual.id == id_clicado){
@@ -105,7 +108,7 @@ function finalizacao(id_clicado, modo_escolhido, lista_acordes, lista_setimas, i
             } else {
                 cores(botao_atual, 'na_escala');} 
 
-            if (acordes_box.checked == false){  
+            if (so_notas_box.checked == false){  
                 if ((id_modo == 0 && contagem == 5) || (id_modo == 5 && contagem == 2)){
                     cores(botao_atual, 'relativa');
                 }
@@ -123,7 +126,7 @@ function finalizacao(id_clicado, modo_escolhido, lista_acordes, lista_setimas, i
             cores(botao_atual, 'ignorado');
         }
     }
-    tocar_sons(notas_para_tocar);
+    tocar_sons(notas_para_tocar, id_modo);    
 }
 
 //função das mudanças de cores e voltar textos ao padrão nos botões
@@ -144,21 +147,49 @@ function cores(botao_atual = null, comando) {
     } 
 }
 
-//função de tocar das notas da escala selecionada, com espaçamento de tempo
-function tocar_sons(escala){
+//função de tocar as notas/acordes da escala selecionada, com intervalos
+function tocar_sons(escala, id_modo){
+    console.log(escala, id_modo)
+    if (so_notas_box.checked){tempo=350} else {tempo=700}
+    let comando = setInterval(tocar, tempo);
     escala.push(`${escala[0]}2`);
-    function tocar(){
-        try{
-            let nota = escala[contagem]
-            audio_notas[nota].pause();
-            audio_notas[nota].currentTime = 0
-            audio_notas[nota].play();
-            contagem += 1;
-        } catch(x){}
-    }
+
     var contagem = 0;
-    let comando = setInterval(tocar, 360);
-    if (contagem > escala.length || escala[contagem] == undefined){
-        clearInterval(comando);
-    } 
+    function tocar(){
+        if (document.getElementById('sem_som').checked == false){
+            try {
+                let acorde = escala[contagem];
+                let pos = parseInt(escala.indexOf(acorde));
+                if (so_notas_box.checked == false){
+                    if (pos+2 < 7){
+                        terca = escala[pos+2];
+                    }else{
+                        terca = escala[pos+2-7] + '2';}
+                        terca = terca.replace('22', '3');
+
+                    if (pos+4 < 7){
+                        quinta = escala[pos+4];
+                    }else{
+                        quinta = escala[pos+4-7] + '2';}
+                        quinta = quinta.replace('22', '3');
+
+                    extra = (acorde+'2').replace('22', '3')
+                    a_tocar = [acorde, terca, quinta, extra];
+                } else {
+                    a_tocar = [acorde]
+                }
+                for (n in a_tocar){   
+                    audio_notas[a_tocar[n]].pause();
+                    audio_notas[a_tocar[n]].currentTime = 0;
+                    audio_notas[a_tocar[n]].play();}
+
+                contagem += 1;
+                if (contagem > escala.length){
+                    clearInterval(comando);
+                }
+            } catch(x){
+                clearInterval(comando);
+            }
+        }
+    }
 }

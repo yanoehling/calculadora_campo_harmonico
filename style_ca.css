@@ -128,7 +128,6 @@ button#limpar:hover {
 }
 
 
-
 div#divswitch{
 	display: flex;
     align-items: center;
@@ -176,8 +175,13 @@ div#divswitch{
 	transform: translateX(26px);
 }
   
-
-
+div#desativar_som{
+	margin-top: 20px;
+	align-content: center;
+	text-align: center;
+} input#sem_som {
+	transform: scale(1.5);
+}
 footer {
 	margin-top: 20px;
 	text-align: center;
