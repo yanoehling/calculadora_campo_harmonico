@@ -126,7 +126,9 @@ function finalizacao(id_clicado, modo_escolhido, lista_acordes, lista_setimas, i
             cores(botao_atual, 'ignorado');
         }
     }
-    tocar_sons(notas_para_tocar, id_modo);    
+    if (document.getElementById('sem_som').checked == false){
+        tocar_sons(notas_para_tocar, id_modo);    
+    }
 }
 
 //função das mudanças de cores e voltar textos ao padrão nos botões
@@ -156,40 +158,39 @@ function tocar_sons(escala, id_modo){
 
     var contagem = 0;
     function tocar(){
-        if (document.getElementById('sem_som').checked == false){
-            try {
-                let acorde = escala[contagem];
-                let pos = parseInt(escala.indexOf(acorde));
-                if (so_notas_box.checked == false){
-                    if (pos+2 < 7){
-                        terca = escala[pos+2];
-                    }else{
-                        terca = escala[pos+2-7] + '2';}
-                        terca = terca.replace('22', '3');
+        try {
+            let acorde = escala[contagem];
+            let pos = parseInt(escala.indexOf(acorde));
+            if (so_notas_box.checked == false){
+                if (pos+2 < 7){
+                    terca = escala[pos+2];
+                }else{
+                    terca = escala[pos+2-7] + '2';}
+                    terca = terca.replace('22', '3');
 
-                    if (pos+4 < 7){
-                        quinta = escala[pos+4];
-                    }else{
-                        quinta = escala[pos+4-7] + '2';}
-                        quinta = quinta.replace('22', '3');
+                if (pos+4 < 7){
+                    quinta = escala[pos+4];
+                }else{
+                    quinta = escala[pos+4-7] + '2';}
+                    quinta = quinta.replace('22', '3');
 
-                    extra = (acorde+'2').replace('22', '3')
-                    a_tocar = [acorde, terca, quinta, extra];
-                } else {
-                    a_tocar = [acorde]
-                }
-                for (n in a_tocar){   
-                    audio_notas[a_tocar[n]].pause();
-                    audio_notas[a_tocar[n]].currentTime = 0;
-                    audio_notas[a_tocar[n]].play();}
+                extra = (acorde+'2').replace('22', '3')
+                a_tocar = [acorde, terca, quinta, extra];
+            } else {
+                a_tocar = [acorde]
+            }
+            for (n in a_tocar){   
+                audio_notas[a_tocar[n]].pause();
+                audio_notas[a_tocar[n]].currentTime = 0;
+                audio_notas[a_tocar[n]].play();}
 
-                contagem += 1;
-                if (contagem > escala.length){
-                    clearInterval(comando);
-                }
-            } catch(x){
+            contagem += 1;
+            if (contagem > escala.length){
                 clearInterval(comando);
             }
+        } catch(x){
+            clearInterval(comando);
         }
+        
     }
 }
